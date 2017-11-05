@@ -5,6 +5,8 @@ import { connect } from 'react-redux';
 
 import { fetchCategories } from '../../../redux/actions/categories';
 
+import { Link } from 'react-router-dom';
+
 class Categories extends React.Component {
 
     state = {
@@ -20,7 +22,7 @@ class Categories extends React.Component {
         return(
             <nav {...styles.navbarStyles}>
                 <ul {...styles.listStyles}>
-                    {this.props.categories.map((item, index) => <li key={index}>{item.name}</li>)}        
+                    {this.props.categories.map((item, index) => <li key={index}><Link to={item.path}>{item.name}</Link></li>)}        
                 </ul>
             </nav>
         )
