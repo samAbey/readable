@@ -6,11 +6,17 @@ import Categories from './common/categories/categories';
 import Posts from './posts';
 import Post from './post';
 
+import { PropTypes } from 'prop-types';
+
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 
 import { connect } from 'react-redux';
 
 class App extends Component {
+
+  static propTypes = {
+    categoryPaths: PropTypes.array.isRequired
+  }
 
   render() {
 
