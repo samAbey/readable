@@ -7,11 +7,14 @@ import { fetchCategories } from '../../../redux/actions/categories';
 
 import { Link } from 'react-router-dom';
 
+import { PropTypes } from 'prop-types';
+
 class Categories extends React.Component {
 
-    state = {
-        categories: []
+    static propTypes = {
+        categories: PropTypes.array.isRequired
     }
+
 
     componentDidMount = () => {
       this.props.getCategories()
@@ -19,10 +22,13 @@ class Categories extends React.Component {
     
 
     render() {
+
+        const { categories } = this.props;
+
         return(
             <nav {...styles.navbarStyles}>
                 <ul {...styles.listStyles}>
-                    {this.props.categories.map((item, index) => <li key={index}><Link to={item.path}>{item.name}</Link></li>)}        
+                    {categories?categories.map((item, index) => <li key={index}><Link to={item.path}>{item.name}</Link></li>):null}        
                 </ul>
             </nav>
         )
