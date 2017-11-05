@@ -9,3 +9,7 @@ const HEADERS = {
 export const getCategories = () => {
     return fetch(`${URL}/categories`, {headers: HEADERS}).then(res=>res.json())
 }
+
+export const getAllPosts = () => {
+    return fetch(`${URL}/posts`, {headers: HEADERS}).then(res=>res.json())
+}

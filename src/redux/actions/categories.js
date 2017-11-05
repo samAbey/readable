@@ -1,6 +1,7 @@
+import { CATEGORIES_RECEIVED, 
+    FETCH_CATEGORIES } from '../action_types';
+    
 import { getCategories } from '../../api/api';
-
-import { CATEGORIES_RECEIVED, FETCH_CATEGORIES } from '../action_types';
 
 export const fetchCategories = () => {
     return dispatch => {
