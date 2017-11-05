@@ -20,7 +20,7 @@ class Categories extends React.Component {
         return(
             <nav {...styles.navbarStyles}>
                 <ul {...styles.listStyles}>
-                    {this.state.categories.map((item, index) => <li>{item.name}</li>)}        
+                    {this.props.categories.map((item, index) => <li key={index}>{item.name}</li>)}        
                 </ul>
             </nav>
         )

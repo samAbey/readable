@@ -1,6 +1,8 @@
+import { CATEGORIES_RECEIVED } from '../action_types';
+
 const categories = (state=[], action) => {
     switch (action.type) {
-        case 'DATA_RECEIVED':
+        case CATEGORIES_RECEIVED:
             return action.data.categories;
 
         default:
