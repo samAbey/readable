@@ -6,24 +6,41 @@ import { PropTypes } from 'prop-types';
 
 import { fetchAllPosts } from '../redux/actions/posts';
 
+import Post from './common/post/post';
+
+
 class Posts extends React.Component {
 
     static propTypes = {
         posts: PropTypes.array.isRequired
     }
 
-    componentDidMount = () => {
+    state = {
+        posts: []
+    }
+
+    componentDidMount () {
       this.props.getAllPosts();
+      
+    }
+
+    componentWillReceiveProps (nextProps) {
+        this.setState({
+            posts: nextProps.posts.sort((a, b) => b.voteScore - a.voteScore)
+        });
     }
     
 
     render () {
 
-        let { posts } = this.props;
+        let { posts } = this.state;
+
+        console.log(posts)
 
         return (
             <div>
-                {posts.map((post, index) => <div key={post.id}>{post.title}</div>)}
+                {posts.map((post, index) => <Post key={post.id} post={post}/>)}
+                
             </div>
         )
     }
