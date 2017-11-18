@@ -28,6 +28,7 @@ class Categories extends React.Component {
         return(
             <nav {...styles.navbarStyles}>
                 <ul {...styles.listStyles}>
+                    <li key="all-cats"><Link to="/"> All</Link></li>
                     {categories?categories.map((item, index) => <li key={index}><Link to={item.path}>{item.name}</Link></li>):null}        
                 </ul>
             </nav>

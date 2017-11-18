@@ -15,12 +15,14 @@ class Post extends React.Component {
             time = moment(post.timestamp).format('MMMM Do YYYY, h:mm:ss a');
 
         return (
-            <div>
+
+            !post.deleted?<div>
                 <h1>{post.title}</h1>
                 <p>{post.voteScore}</p>
                 <p>{time}</p>
                 <p>{post.commentCount===0?'No Comments Yet':`${post.commentCount} Comments`}</p>
-            </div>
+            </div>:null
+            
         )
     }
 }

@@ -13,7 +13,8 @@ import SortBar from './common/sort/sortbar';
 class Posts extends React.Component {
 
     static propTypes = {
-        posts: PropTypes.array.isRequired
+        posts: PropTypes.array.isRequired,
+        cat: PropTypes.string.isRequired
     }
 
     state = {
@@ -28,8 +29,13 @@ class Posts extends React.Component {
     componentWillReceiveProps (nextProps) {
 
         // By default sorty by vote (Highest first)
+
+        let FilterdByCat = this.props.cat==='all'
+            ? nextProps.posts
+            : nextProps.posts.filter(post=>post.category === this.props.cat);
+
         this.setState({
-            posts: nextProps.posts.sort((a, b) => b.voteScore - a.voteScore)
+            posts: FilterdByCat.sort((a, b) => b.voteScore - a.voteScore)
         });
     }
 
@@ -74,7 +80,7 @@ class Posts extends React.Component {
                 />
 
 
-                {posts.map((post, index) => <Post key={post.id} post={post}/>)}
+                {posts.length?posts.map((post, index) => <Post key={post.id} post={post}/>):'No Posts Available'}
                 
             </div>
         )

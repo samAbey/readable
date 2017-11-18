@@ -14,12 +14,12 @@ import { connect } from 'react-redux';
 class App extends Component {
 
   static propTypes = {
-    categoryPaths: PropTypes.array.isRequired
+    categories: PropTypes.array.isRequired
   }
 
   render() {
 
-    const { categoryPaths } = this.props;
+    const { categories } = this.props;
 
     return (
 
@@ -28,12 +28,21 @@ class App extends Component {
           
           <Header />
           <Categories />
-
+          
           <Route 
             exact
             path="/"
-            render={() => <Posts />}
+            render={() => <Posts cat="all"/>}
           />
+
+          {categories.map(({path, name}, index) => (
+            <Route
+              exact
+              path={`/${path}`}
+              render={()=><Posts cat={name}/>}
+              key={path}
+            />
+          ))}
               
               
 
@@ -46,14 +55,8 @@ class App extends Component {
 
 const mapStateToProps = ({categories}) => {
 
-  let categoryPaths = [];
-
-  for (let cat of categories) {
-    categoryPaths.push(cat.path);
-  }
-
   return {
-    categoryPaths
+    categories
   }
 }
 
