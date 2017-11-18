@@ -29,11 +29,11 @@ class App extends Component {
           <Header />
           <Categories />
 
-              <Route 
-                exact
-                path="/"
-                render={() => <Posts />}
-              />
+          <Route 
+            exact
+            path="/"
+            render={() => <Posts />}
+          />
               
               
 

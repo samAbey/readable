@@ -7,6 +7,7 @@ import { PropTypes } from 'prop-types';
 import { fetchAllPosts } from '../redux/actions/posts';
 
 import Post from './common/post/post';
+import SortBar from './common/sort/sortbar';
 
 
 class Posts extends React.Component {
@@ -29,16 +30,29 @@ class Posts extends React.Component {
             posts: nextProps.posts.sort((a, b) => b.voteScore - a.voteScore)
         });
     }
+
+    sortByVoteUp = () => {
+        this.setState ({
+            posts: this.state.posts.sort((a, b) => a.voteScore - b.voteScore)
+        });
+    }
+    sortByVoteDown = () => {
+        this.setState ({
+            posts: this.state.posts.sort((a, b) => b.voteScore - a.voteScore)
+        });
+    }
     
 
     render () {
 
         let { posts } = this.state;
 
-        console.log(posts)
-
         return (
             <div>
+
+                <SortBar voteUp={this.sortByVoteUp} voteDown={this.sortByVoteDown}/>
+
+
                 {posts.map((post, index) => <Post key={post.id} post={post}/>)}
                 
             </div>
