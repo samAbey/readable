@@ -1,5 +1,7 @@
 import React from 'react';
 
+import { sortbarStyles } from './sortbar.css'
+
 import { 
     SortByVotesUp, 
     SortByVotesDown,
@@ -10,7 +12,7 @@ class SortBar extends React.Component {
 
     render () {
         return (
-            <ul>
+            <ul {...sortbarStyles}>
                 <li><SortByVotesUp voteUp={this.props.voteUp} />Votes<SortByVotesDown voteDown={this.props.voteDown} /></li>
                 <li><SortByTimestampUp timestampUp={this.props.timestampUp} />Time<SortByTimestampDown timestampDown={this.props.timestampDown} /></li>
             </ul>
