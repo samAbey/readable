@@ -9,3 +9,9 @@ export const SortByVotesUp = props => {
 export const SortByVotesDown = props => {
     return <div onClick={props.voteDown}><FaAngleDown /></div>
 }
+export const SortByTimestampUp = props => {
+    return <div onClick={props.timestampUp}><FaAngleUp /></div>
+}
+export const SortByTimestampDown = props => {
+    return <div onClick={props.timestampDown}><FaAngleDown /></div>
+}

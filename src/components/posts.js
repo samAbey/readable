@@ -26,19 +26,35 @@ class Posts extends React.Component {
     }
 
     componentWillReceiveProps (nextProps) {
+
+        // By default sorty by vote (Highest first)
         this.setState({
             posts: nextProps.posts.sort((a, b) => b.voteScore - a.voteScore)
         });
     }
 
+
     sortByVoteUp = () => {
-        this.setState ({
+        this.setState({
+            posts: this.state.posts.sort((a, b) => b.voteScore - a.voteScore)
+        });
+    }
+
+    sortByVoteDown = () => {
+        this.setState({
             posts: this.state.posts.sort((a, b) => a.voteScore - b.voteScore)
         });
     }
-    sortByVoteDown = () => {
-        this.setState ({
-            posts: this.state.posts.sort((a, b) => b.voteScore - a.voteScore)
+
+    sortByTimestampUp = () => {
+        this.setState({
+            posts: this.state.posts.sort((a, b) => b.timestamp - a.timestamp)
+        });
+    }
+
+    sortByTimestampDown = () => {
+        this.setState({
+            posts: this.state.posts.sort((a, b) => a.timestamp - b.timestamp)
         });
     }
     
@@ -50,7 +66,12 @@ class Posts extends React.Component {
         return (
             <div>
 
-                <SortBar voteUp={this.sortByVoteUp} voteDown={this.sortByVoteDown}/>
+                <SortBar 
+                    voteUp={this.sortByVoteUp} 
+                    voteDown={this.sortByVoteDown}
+                    timestampUp={this.sortByTimestampUp}
+                    timestampDown={this.sortByTimestampDown}
+                />
 
 
                 {posts.map((post, index) => <Post key={post.id} post={post}/>)}
