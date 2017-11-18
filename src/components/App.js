@@ -4,10 +4,11 @@ import './App.css';
 import Header from './common/header/header';
 import Categories from './common/categories/categories';
 import Posts from './posts';
+import NewPost from './new-post';
 
 import { PropTypes } from 'prop-types';
 
-import { BrowserRouter as Router, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
 
 import { connect } from 'react-redux';
 
@@ -28,6 +29,13 @@ class App extends Component {
           
           <Header />
           <Categories />
+          
+
+          <Route
+            exact
+            path="/new"
+            render={() => <NewPost />}
+          />
           
           <Route 
             exact
