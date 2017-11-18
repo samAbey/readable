@@ -8,7 +8,7 @@ import NewPost from './new-post/new-post';
 
 import { PropTypes } from 'prop-types';
 
-import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
+import { BrowserRouter as Router, Route } from 'react-router-dom';
 
 import { connect } from 'react-redux';
 
