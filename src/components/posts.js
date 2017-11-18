@@ -9,6 +9,8 @@ import { fetchAllPosts } from '../redux/actions/posts';
 import Post from './common/post/post';
 import SortBar from './common/sort/sortbar';
 
+import { postsStyles } from './posts.css';
+
 
 class Posts extends React.Component {
 
@@ -70,7 +72,7 @@ class Posts extends React.Component {
         let { posts } = this.state;
 
         return (
-            <div>
+            <div {...postsStyles}>
 
                 <SortBar 
                     voteUp={this.sortByVoteUp} 

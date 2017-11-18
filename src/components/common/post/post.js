@@ -3,6 +3,8 @@ import React from 'react';
 import { PropTypes } from 'prop-types';
 import moment from 'moment';
 
+import { postStyles } from './post.css'
+
 class Post extends React.Component {
 
     static propTypes = {
@@ -16,7 +18,7 @@ class Post extends React.Component {
 
         return (
 
-            !post.deleted?<div>
+            !post.deleted?<div {...postStyles}>
                 <h1>{post.title}</h1>
                 <p>{post.voteScore}</p>
                 <p>{time}</p>
