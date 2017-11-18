@@ -5,6 +5,7 @@ import Header from './common/header/header';
 import Categories from './common/categories/categories';
 import Posts from './posts';
 import NewPost from './new-post/new-post';
+import PostDetails from './common/post/post-details';
 
 import { PropTypes } from 'prop-types';
 
@@ -35,6 +36,12 @@ class App extends Component {
             exact
             path="/new"
             render={() => <NewPost />}
+          />
+
+          <Route
+            exact
+            path="/post/:postid"
+            render={(props) => <PostDetails postid={props.match.params.postid}/>}
           />
           
           <Route 

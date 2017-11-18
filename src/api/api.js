@@ -24,3 +24,7 @@ export const newPost = (post) => {
         }
     )
 }
+
+export const fetchPost = id => {
+    return fetch(`${URL}/posts/${id}`, {headers: HEADERS}).then(res=>res.json())
+}
