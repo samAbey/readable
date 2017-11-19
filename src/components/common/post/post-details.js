@@ -52,9 +52,9 @@ class PostDetails extends React.Component {
                 <p>Votes: {post.voteScore}</p>
                 <p>Comments: {post.commentCount?post.commentCount:'No comments yet'}</p>
                 <div>
-                    {this.props.post?<Comments comments={this.props.comments}/>:null}
+                    {this.props.post?<Comments postid={this.props.postid} comments={this.props.comments}/>:null}
                 </div>
-                <AddComment postid={this.props.postid} />
+                
                 <div>
                     <Link to={{
                         pathname: `/post/edit/${post.id}`

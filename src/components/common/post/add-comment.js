@@ -2,8 +2,7 @@ import React from 'react';
 
 import { connect } from 'react-redux';
 
-import { addCommentToPost, getComments } from '../../../redux/actions/comments';
-import { getPost } from '../../../redux/actions/posts';
+import { getComments } from '../../../redux/actions/comments';
 import uuid from 'uuid';
 
 
@@ -25,21 +24,20 @@ class AddComment extends React.Component {
     }
 
 
-    addComment = event => {
-        event.preventDefault ();
+    constComment = () => {
 
-        this.props.addComment({
+        let comment = {
             id: uuid(Date.now()),
             timestamp: Date.now(),
             body: this.state.body,
             author: this.state.author,
             parentId: this.props.postid
-        });
+        };
 
         this.refs.body.value = '';
         this.refs.author.value = '';
 
-        this.props.getComments(this.props.postid)
+        return comment
     }
 
     
@@ -54,7 +52,10 @@ class AddComment extends React.Component {
                     <input ref="author" onChange={this.handleChange} id="author" placeholder="Your Name" type="text" value={this.props.author} />
                 </div>
                 <div>
-                    <a href="" onClick={this.addComment}>Add comment</a>
+                    <a href="" onClick={event => {
+                        this.props.addComment(this.constComment());
+                        event.preventDefault ()
+                        }}>Add comment</a>
                 </div>
             </div>
         )
@@ -63,9 +64,8 @@ class AddComment extends React.Component {
 
 const mapDispatchToProps = dispatch => {
     return {
-        addComment: post => dispatch(addCommentToPost(post)),
-        getComments: id => dispatch(getComments(id)),
-        getPost: id => dispatch(getPost(id))
+       
+        getComments: id => dispatch(getComments(id))
     }
 }
 

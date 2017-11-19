@@ -1,9 +1,20 @@
 import React from 'react';
 import { PropTypes } from 'prop-types';
 
+import { connect } from 'react-redux';
 
+import { addCommentToPost, getComments } from '../../../redux/actions/comments';
+
+import AddComment from './add-comment';
 
 class Comments extends React.Component {
+
+    
+    addComment = (comment) => {
+        console.log(comment, 'aaaa')
+        this.props.addComment(comment)
+        this.props.getComments(this.props.postid)
+    }
 
 
     render () {
@@ -12,6 +23,7 @@ class Comments extends React.Component {
         
 
         return (
+            <div>
             <ul>
                 {comments?comments.map((comment, index)=> {
                     return (
@@ -26,9 +38,18 @@ class Comments extends React.Component {
                     )
                 }):null}
             </ul>
+            <AddComment postid={this.props.postid} addComment={this.addComment} />
+            </div>
         )
     }
 }
 
 
-export default Comments
+const mapDispatchToProps = dispatch => {
+    return {
+        addComment: post => dispatch(addCommentToPost(post)),
+        getComments: id => dispatch(getComments(id))
+    }
+}
+
+export default connect (null, mapDispatchToProps)(Comments)
