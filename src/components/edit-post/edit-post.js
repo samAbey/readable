@@ -1,16 +1,14 @@
 import React from 'react';
 
 import { connect } from 'react-redux';
-import { getPost } from '../../redux/actions/posts';
+import { getPost, editSinglePost } from '../../redux/actions/posts';
 
 class EditPost extends React.Component {
 
 
     state = {
         title: '',
-        post: '',
-        author: '',
-        category: '',
+        body: ''
     }
 
     onChange = event => {
@@ -24,21 +22,27 @@ class EditPost extends React.Component {
         
     }
 
+    handleSubmit = (event) => {
+
+        event.preventDefault();
+        this.props.editPost(this.state, this.props.postId);
+
+    }
+
     componentDidMount () {
         this.props.getPost (this.props.postId);
     }
 
     componentWillReceiveProps (nextProps) {
 
-        let { title, body, id, author, category } = nextProps.post?nextProps.post:null;
+        let { title, body, id } = nextProps.post?nextProps.post:null;
 
         this.setState({
             title,
-            body,
-            author, 
-            category
+            body
         })
     }
+
 
     render () {
 
@@ -48,14 +52,7 @@ class EditPost extends React.Component {
         return (
             
             <div>
-                <div>
-                    <select name="" id="" onChange={this.onChange} value={this.state.category}>
-                        {categories.map((category, index) => {
-                            return <option value={category.value} key={index}>{category.name}</option>
-                        })}
-                    </select>
-                </div>
-
+                
                 <div>
                     <input placeholder="Title" onChange={this.onChange} type="text" id="title" value={this.state.title} />
                 </div>
@@ -63,10 +60,7 @@ class EditPost extends React.Component {
                     <textarea onChange={this.onChange} id="body" value={this.state.body} />
                 </div>
                 <div>
-                    <input placeholder="Your name"  onChange={this.onChange} type="text" id="author" value={this.state.author} />
-                </div>
-                <div>
-                    <a onClick={this.handleSubmit} href="">Submit</a>
+                    <a onClick={this.handleSubmit} href="">Edit</a>
                 </div>
             </div>
            
@@ -76,16 +70,16 @@ class EditPost extends React.Component {
 
 const mapStateToProps = state => {
 
-    let { post, categories } = state;
+    let { post } = state;
     return {
-        post,
-        categories
+        post
     }
 }
 
 const mapDispatchToProps = dispatch => {
     return {
-        getPost: id => dispatch(getPost(id))
+        getPost: id => dispatch(getPost(id)),
+        editPost: (post, id) => dispatch(editSinglePost(post, id))
     }
 }
 

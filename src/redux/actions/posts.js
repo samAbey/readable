@@ -1,6 +1,13 @@
-import { POSTS_RECEIVED, FETCH_POSTS, CREATE_NEW_POST, NEW_POST_CREATED, GET_POST, POST_DETAILS_RECEIVED } from '../action_types';
+import { POSTS_RECEIVED, 
+    FETCH_POSTS, 
+    CREATE_NEW_POST, 
+    NEW_POST_CREATED, 
+    GET_POST, 
+    POST_DETAILS_RECEIVED,
+    POST_EDITED,
+    EDIT_POST } from '../action_types';
 
-import { getAllPosts, newPost, fetchPost } from '../../api/api';
+import { getAllPosts, newPost, fetchPost, editPost } from '../../api/api';
 
 export const fetchAllPosts = () => {
     return dispatch => {
@@ -48,5 +55,21 @@ export const getPost = id => {
             });
         });
 
+    }
+}
+
+export const editSinglePost = (post, id) => {
+    return dispatch => {
+        
+        dispatch ({
+            type: EDIT_POST
+        });
+        
+        editPost(post, id).then (data => {
+            dispatch ({
+                type: POST_EDITED,
+                data
+            });
+        });
     }
 }
