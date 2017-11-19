@@ -41,6 +41,11 @@ class PostDetails extends React.Component {
 }
 
 const mapStateToProps = ({post, comments}) => {
+
+    comments = comments.sort ((a, b) => {
+        return b.voteScore - a.voteScore;
+    });
+
     return {
         post,
         comments

@@ -9,15 +9,20 @@ class Comments extends React.Component {
     render () {
 
         let { comments } = this.props;
-        console.log(comments)
+
+
         return (
             <ul>
                 {comments?comments.map((comment, index)=> {
                     return (
                         !comment.deleted?
+
                         <div key={comment.id}>
-                            {<p >{comment.body}</p>}
-                        </div>:'This comment has been deleted'
+                            <p >{comment.body}</p>
+                            <span>By {comment.author} </span><span>{comment.voteScore} Thumbs up</span>
+                        </div>
+                        
+                        :<div>This comment has been deleted'</div>
                     )
                 }):null}
             </ul>
