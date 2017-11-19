@@ -12,8 +12,8 @@ class NewPost extends React.Component {
     state = {
         title: '',
         post: '',
-        author: ''
-
+        author: '',
+        category: ''
     }
 
     onChange = event => {
@@ -44,8 +44,18 @@ class NewPost extends React.Component {
 
     render () {
 
+        let { categories } = this.props;
+        console.log(categories)
         return (
             <div {...newPostStyles}>
+                <div>
+                    <select name="" id="" onChange={this.onChange}>
+                        {categories.map((category, index) => {
+                            return <option value={category.value} key={index}>{category.name}</option>
+                        })}
+                    </select>
+                </div>
+
                 <div>
                     <input placeholder="Title" onChange={this.onChange} type="text" id="title" value={this.state.value} />
                 </div>
@@ -70,8 +80,12 @@ const mapDispatchToProps = dispatch => {
 };
 
 const mapStateToProps = state => {
-    return {
 
+    let { categories } = state;
+
+
+    return {
+        categories
     }
 }
 
