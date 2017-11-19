@@ -1,8 +1,6 @@
 import React from 'react';
 
 import { connect } from 'react-redux';
-
-import { getComments } from '../../../redux/actions/comments';
 import uuid from 'uuid';
 
 
@@ -37,8 +35,34 @@ class AddComment extends React.Component {
         this.refs.body.value = '';
         this.refs.author.value = '';
 
+        this.setState({
+            body: '',
+            author: ''
+        });
+
         return comment
     }
+
+    componentWillReceiveProps (nextProps) {
+
+        if (nextProps.mode==='edit') {
+            this.setState({
+                body: nextProps.editCommentValues.body,
+                author: nextProps.editCommentValues.author
+            })
+            this.refs.body.value = nextProps.editCommentValues.body;
+            this.refs.author.value = nextProps.editCommentValues.author;
+        } else if (nextProps.mode==='add') {
+            this.setState({
+                body:'',
+                author: ''
+            })
+            this.refs.body.value = '';
+            this.refs.author.value = '';
+        }
+
+        //this.refs.body.value=nextProps.editCommentValues.body: null
+    } 
 
     
 
@@ -54,7 +78,8 @@ class AddComment extends React.Component {
                 <div>
                     <a href="" onClick={event => {
                         this.props.addComment(this.constComment());
-                        event.preventDefault ()
+                        this.props.changeMode();
+                        event.preventDefault ();
                         }}>Add comment</a>
                 </div>
             </div>
@@ -62,11 +87,5 @@ class AddComment extends React.Component {
     }
 }
 
-const mapDispatchToProps = dispatch => {
-    return {
-       
-        getComments: id => dispatch(getComments(id))
-    }
-}
 
-export default connect (null, mapDispatchToProps)(AddComment);
+export default AddComment;
