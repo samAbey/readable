@@ -12,3 +12,5 @@ export const EDIT_POST = 'EDIT_POST';
 export const POST_EDITED = 'POST_EDITED';
 export const DELETE_POST = 'DELETE_POST';
 export const POST_DELETED = 'POST_DELETED';
+export const ADD_COMMENT = 'ADD_COMMENT';
+export const COMMENT_ADDED = 'COMMENT_ADDED';

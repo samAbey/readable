@@ -30,9 +30,10 @@ class EditPost extends React.Component {
         event.preventDefault();
         this.props.editPost(this.state, this.props.postId);
 
+
         this.setState ({
             redirect: true
-        });
+        })
 
     }
 
@@ -48,8 +49,6 @@ class EditPost extends React.Component {
             title,
             body
         });
-
-        
     }
 
 

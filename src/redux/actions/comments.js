@@ -1,6 +1,6 @@
-import { fetchComments } from '../../api/api';
+import { fetchComments, addComment } from '../../api/api';
 
-import{ FETCH_COMMENTS, COMMENTS_RECEIVED } from '../action_types';
+import{ FETCH_COMMENTS, COMMENTS_RECEIVED, ADD_COMMENT } from '../action_types';
 
 
 export const getComments = id => {
@@ -19,5 +19,23 @@ export const getComments = id => {
             });
         });
     }
+
+}
+
+export const addCommentToPost = (comment) => {
+
+   return dispatch => {
+        dispatch ({
+            type: ADD_COMMENT
+        });
+
+        addComment (comment).then((data) => {
+            dispatch ({
+                type: ADD_COMMENT,
+                data
+            })
+        });
+   }
+
 
 }

@@ -1,5 +1,6 @@
 import React from 'react';
-import { Link, Redirect, withRouter } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
+import { withRouter } from 'react-router';
 
 import moment from 'moment';
 
@@ -12,6 +13,7 @@ import { getComments } from '../../../redux/actions/comments';
 
 import { postDetailsWrapperStyles } from './post-details.css';
 import Comments from './comment';
+import AddComment from './add-comment';
 import { deleteSinglePost, fetchAllPosts } from '../../../redux/actions/posts';
 
 class PostDetails extends React.Component {
@@ -52,9 +54,7 @@ class PostDetails extends React.Component {
                 <div>
                     {this.props.post?<Comments comments={this.props.comments}/>:null}
                 </div>
-                <div>
-                    <a href="">Add comment</a>
-                </div>
+                <AddComment postid={this.props.postid} />
                 <div>
                     <Link to={{
                         pathname: `/post/edit/${post.id}`
@@ -87,4 +87,4 @@ const mapDispatchToProps = dispatch => {
     }
 }
 
-export default connect (mapStateToProps, mapDispatchToProps) (PostDetails);
+export default withRouter(connect (mapStateToProps, mapDispatchToProps) (PostDetails));

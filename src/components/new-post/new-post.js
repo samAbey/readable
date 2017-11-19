@@ -6,7 +6,6 @@ import { createNewPost } from '../../redux/actions/posts';
 import uuid from 'uuid';
 
 import { newPostStyles } from './new-post.css';
-import { redirectWidth } from 'react-router';
 import { Redirect } from 'react-router-dom';
 
 class NewPost extends React.Component {
