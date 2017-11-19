@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 import moment from 'moment';
 
@@ -34,6 +35,12 @@ class PostDetails extends React.Component {
                 <p>Comments: {post.commentCount?post.commentCount:'No comments yet'}</p>
                 <div>
                     {this.props.post?<Comments comments={this.props.comments}/>:null}
+                </div>
+                <div>
+                    <Link to={{
+                        pathname: `/post/edit/${post.id}`
+                    }}>Edit</Link>
+                    <a href="">Delete</a>
                 </div>
             </div>
         );

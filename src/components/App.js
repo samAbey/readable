@@ -6,6 +6,7 @@ import Categories from './common/categories/categories';
 import Posts from './posts';
 import NewPost from './new-post/new-post';
 import PostDetails from './common/post/post-details';
+import EditPost from './edit-post/edit-post';
 
 import { PropTypes } from 'prop-types';
 
@@ -41,13 +42,19 @@ class App extends Component {
           <Route
             exact
             path="/post/:postid"
-            render={(props) => <PostDetails postid={props.match.params.postid}/>}
+            render={(props) => <PostDetails postid={props.match.params.postid} />}
           />
           
           <Route 
             exact
             path="/"
             render={() => <Posts cat="all"/>}
+          />
+
+          <Route 
+            exact
+            path="/post/edit/:postid"
+            render={props => <EditPost postId={props.match.params.postid} /> }
           />
 
           {categories.map(({path, name}, index) => (
