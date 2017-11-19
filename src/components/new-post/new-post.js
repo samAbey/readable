@@ -5,6 +5,8 @@ import { createNewPost } from '../../redux/actions/posts';
 
 import uuid from 'uuid';
 
+import { newPostStyles } from './new-post.css';
+
 class NewPost extends React.Component {
 
     state = {
@@ -43,18 +45,15 @@ class NewPost extends React.Component {
     render () {
 
         return (
-            <div>
+            <div {...newPostStyles}>
                 <div>
-                    <label htmlFor="title">Title</label>
-                    <input onChange={this.onChange} type="text" id="title" value={this.state.value} />
+                    <input placeholder="Title" onChange={this.onChange} type="text" id="title" value={this.state.value} />
                 </div>
                 <div>
-                    <label htmlFor="post">Post</label>
                     <textarea onChange={this.onChange} id="post" value={this.state.post} />
                 </div>
                 <div>
-                    <label htmlFor="author">Author</label>
-                    <input onChange={this.onChange} type="text" id="author" value={this.state.author} />
+                    <input placeholder="Your name"  onChange={this.onChange} type="text" id="author" value={this.state.author} />
                 </div>
                 <div>
                     <a onClick={this.handleSubmit} href="">Submit</a>

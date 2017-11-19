@@ -1,5 +1,7 @@
 import React from 'react';
 
+import moment from 'moment';
+
 import { PropTypes } from 'prop-types';
 
 import { connect } from 'react-redux';
@@ -22,8 +24,10 @@ class PostDetails extends React.Component {
         return (
             <div>
                 <h1>{post.title}</h1>
+                <span>By {post.author} - {moment(post.timestamp).format('MMMM Do YYYY, h:mm:ss a')}</span>
                 <p>{post.body}</p>
                 <p>Votes: {post.voteScore}</p>
+                <p>Category: {post.category}</p>
                 <p>Comments: {post.commentCount?post.commentCount:'No comments yet'}</p>
             </div>
         );
