@@ -3,7 +3,7 @@ import './App.css';
 
 import Header from './common/header/header';
 import Categories from './common/categories/categories';
-import Posts from './posts';
+import Posts from './posts/posts';
 import NewPost from './new-post/new-post';
 import PostDetails from './common/post/post-details';
 import EditPost from './edit-post/edit-post';

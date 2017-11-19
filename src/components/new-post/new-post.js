@@ -6,6 +6,8 @@ import { createNewPost } from '../../redux/actions/posts';
 import uuid from 'uuid';
 
 import { newPostStyles } from './new-post.css';
+import { redirectWidth } from 'react-router';
+import { Redirect } from 'react-router-dom';
 
 class NewPost extends React.Component {
 
@@ -13,7 +15,8 @@ class NewPost extends React.Component {
         title: '',
         post: '',
         author: '',
-        category: ''
+        category: '',
+        redirect: false
     }
 
     onChange = event => {
@@ -41,12 +44,16 @@ class NewPost extends React.Component {
             author,
             category: 'redux'
         });
+
+        this.setState({
+            redirect: true
+        })
     }
 
     render () {
 
         let { categories } = this.props;
-        return (
+        return !this.state.redirect?(
             <div {...newPostStyles}>
                 <div>
                     <select name="" id="" onChange={this.onChange}>
@@ -69,7 +76,7 @@ class NewPost extends React.Component {
                     <a onClick={this.handleSubmit} href="">Submit</a>
                 </div>
             </div>
-        )
+        ):<Redirect to="/" />
     }
 }
 
