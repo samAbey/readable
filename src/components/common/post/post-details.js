@@ -6,7 +6,9 @@ import { PropTypes } from 'prop-types';
 
 import { connect } from 'react-redux';
 
-import { getPost } from '../../../redux/actions/posts'
+import { getPost } from '../../../redux/actions/posts';
+
+import { postDetailsWrapperStyles } from './post-details.css';
 
 class PostDetails extends React.Component {
 
@@ -20,14 +22,12 @@ class PostDetails extends React.Component {
 
     render () {
         let { post } = this.props;
-        console.log(post)
         return (
-            <div>
+            <div {...postDetailsWrapperStyles}>
                 <h1>{post.title}</h1>
-                <span>By {post.author} - {moment(post.timestamp).format('MMMM Do YYYY, h:mm:ss a')}</span>
-                <p>{post.body}</p>
+                <span>By {post.author} - {moment(post.timestamp).format('MMMM Do YYYY, h:mm:ss a')} posted under <span style={{color: 'tomato'}}>{post.category}</span></span>
+                <p class="post-body-text">{post.body}</p>
                 <p>Votes: {post.voteScore}</p>
-                <p>Category: {post.category}</p>
                 <p>Comments: {post.commentCount?post.commentCount:'No comments yet'}</p>
             </div>
         );
