@@ -8,15 +8,15 @@ const HEADERS = {
 }
 
 export const getCategories = () => {
-    return fetch(`${URL}/categories`, {headers: HEADERS}).then(res=>res.json())
+    return fetch (`${URL}/categories`, {headers: HEADERS}).then(res=>res.json())
 }
 
 export const getAllPosts = () => {
-    return fetch(`${URL}/posts`, {headers: HEADERS}).then(res=>res.json())
+    return fetch (`${URL}/posts`, {headers: HEADERS}).then(res=>res.json())
 }
 
 export const newPost = (post) => {
-    return fetch(
+    return fetch (
         `${URL}/posts`, {
             method: 'POST',
             headers: { ...HEADERS,  'Content-Type': 'application/json'},
@@ -26,5 +26,9 @@ export const newPost = (post) => {
 }
 
 export const fetchPost = id => {
-    return fetch(`${URL}/posts/${id}`, {headers: HEADERS}).then(res=>res.json())
+    return fetch (`${URL}/posts/${id}`, {headers: HEADERS}).then(res=>res.json());
+}
+
+export const fetchComments = id => {
+    return fetch (`${URL}/posts/${id}/comments`, {headers: HEADERS}).then(res=>res.json());
 }

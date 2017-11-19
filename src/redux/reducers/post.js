@@ -1,6 +1,6 @@
 import { POST_DETAILS_RECEIVED } from '../action_types';
 
-const post = (post={}, action) => {
+const postReducer = (post={}, action) => {
 
     switch(action.type) {
 
@@ -12,4 +12,4 @@ const post = (post={}, action) => {
     }
 }
 
-export default post;
+export default postReducer;

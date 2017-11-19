@@ -1,6 +1,6 @@
 import { POSTS_RECEIVED } from '../action_types';
 
-const posts = (posts=[], action) => {
+const postsReducer = (posts=[], action) => {
     switch(action.type) {
         case POSTS_RECEIVED:
             return Object.assign([], posts, [...action.data]);
@@ -10,4 +10,4 @@ const posts = (posts=[], action) => {
     }
 }
 
-export default posts;
+export default postsReducer;

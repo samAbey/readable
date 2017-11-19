@@ -7,8 +7,10 @@ import { PropTypes } from 'prop-types';
 import { connect } from 'react-redux';
 
 import { getPost } from '../../../redux/actions/posts';
+import { getComments } from '../../../redux/actions/comments';
 
 import { postDetailsWrapperStyles } from './post-details.css';
+import Comments from './comment';
 
 class PostDetails extends React.Component {
 
@@ -18,6 +20,7 @@ class PostDetails extends React.Component {
 
     componentDidMount () {
         this.props.getPost(this.props.postid);
+        this.props.getComments(this.props.postid);
     }
 
     render () {
@@ -26,23 +29,28 @@ class PostDetails extends React.Component {
             <div {...postDetailsWrapperStyles}>
                 <h1>{post.title}</h1>
                 <span>By {post.author} - {moment(post.timestamp).format('MMMM Do YYYY, h:mm:ss a')} posted under <span style={{color: 'tomato'}}>{post.category}</span></span>
-                <p class="post-body-text">{post.body}</p>
+                <p className="post-body-text">{post.body}</p>
                 <p>Votes: {post.voteScore}</p>
                 <p>Comments: {post.commentCount?post.commentCount:'No comments yet'}</p>
+                <div>
+                    {this.props.post?<Comments comments={this.props.comments}/>:null}
+                </div>
             </div>
         );
     }
 }
 
-const mapStateToProps = ({post}) => {
+const mapStateToProps = ({post, comments}) => {
     return {
-        post
+        post,
+        comments
     }
 }
 
 const mapDispatchToProps = dispatch => {
     return {
-        getPost: id => dispatch(getPost(id))
+        getPost: id => dispatch(getPost(id)),
+        getComments: id => dispatch(getComments(id))
     }
 }
 

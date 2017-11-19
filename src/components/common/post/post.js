@@ -6,6 +6,7 @@ import moment from 'moment';
 import { postStyles, postMetaStyles } from './post.css'
 import { Link } from 'react-router-dom';
 
+
 class Post extends React.Component {
 
     static propTypes = {
