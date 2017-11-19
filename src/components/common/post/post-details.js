@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, Redirect, withRouter } from 'react-router-dom';
 
 import moment from 'moment';
 
@@ -12,11 +12,27 @@ import { getComments } from '../../../redux/actions/comments';
 
 import { postDetailsWrapperStyles } from './post-details.css';
 import Comments from './comment';
+import { deleteSinglePost, fetchAllPosts } from '../../../redux/actions/posts';
 
 class PostDetails extends React.Component {
 
+    state = {
+        redirect: false
+    }
+
     static propTypes = {
         postid: PropTypes.string.isRequired
+    }
+
+    deletePost = (event) => {
+        event.preventDefault();
+        this.props.deletePost(this.props.postid);
+        this.props.getAllPosts()
+        this.setState({
+            redirect: true
+        });
+
+        
     }
 
     componentDidMount () {
@@ -26,7 +42,7 @@ class PostDetails extends React.Component {
 
     render () {
         let { post } = this.props;
-        return (
+        return this.state.redirect?<Redirect to="/" push={true} />:(
             <div {...postDetailsWrapperStyles}>
                 <h1>{post.title}</h1>
                 <span>By {post.author} - {moment(post.timestamp).format('MMMM Do YYYY, h:mm:ss a')} posted under <span style={{color: 'tomato'}}>{post.category}</span></span>
@@ -40,7 +56,7 @@ class PostDetails extends React.Component {
                     <Link to={{
                         pathname: `/post/edit/${post.id}`
                     }}>Edit</Link>
-                    <a href="">Delete</a>
+                    <a href="" onClick={this.deletePost}>Delete</a>
                 </div>
             </div>
         );
@@ -62,7 +78,9 @@ const mapStateToProps = ({post, comments}) => {
 const mapDispatchToProps = dispatch => {
     return {
         getPost: id => dispatch(getPost(id)),
-        getComments: id => dispatch(getComments(id))
+        getComments: id => dispatch(getComments(id)),
+        deletePost: id => dispatch(deleteSinglePost(id)),
+        getAllPosts: () => dispatch(fetchAllPosts())
     }
 }
 

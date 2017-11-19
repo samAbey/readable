@@ -11,6 +11,8 @@ import SortBar from './common/sort/sortbar';
 
 import { postsStyles } from './posts.css';
 
+import { withRouter } from 'react-router';
+
 
 class Posts extends React.Component {
 
@@ -101,4 +103,4 @@ const mapDispatchToProps = dispatch => {
     }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps) (Posts);
+export default withRouter(connect(mapStateToProps, mapDispatchToProps) (Posts));

@@ -5,9 +5,11 @@ import { POSTS_RECEIVED,
     GET_POST, 
     POST_DETAILS_RECEIVED,
     POST_EDITED,
-    EDIT_POST } from '../action_types';
+    EDIT_POST,
+    DELETE_POST,
+    POST_DELETED } from '../action_types';
 
-import { getAllPosts, newPost, fetchPost, editPost } from '../../api/api';
+import { getAllPosts, newPost, fetchPost, editPost, deletePost } from '../../api/api';
 
 export const fetchAllPosts = () => {
     return dispatch => {
@@ -68,6 +70,22 @@ export const editSinglePost = (post, id) => {
         editPost(post, id).then (data => {
             dispatch ({
                 type: POST_EDITED,
+                data
+            });
+        });
+    }
+}
+
+export const deleteSinglePost = (id) => {
+    return dispatch => {
+        
+        dispatch ({
+            type: DELETE_POST
+        });
+        
+        deletePost(id).then (data => {
+            dispatch ({
+                type: POST_DELETED,
                 data
             });
         });

@@ -10,3 +10,5 @@ export const FETCH_COMMENTS = 'FETCHING_COMMENTS';
 export const COMMENTS_RECEIVED = 'COMMENTS_RECEIVED';
 export const EDIT_POST = 'EDIT_POST';
 export const POST_EDITED = 'POST_EDITED';
+export const DELETE_POST = 'DELETE_POST';
+export const POST_DELETED = 'POST_DELETED';
