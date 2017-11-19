@@ -32,6 +32,7 @@ class NewPost extends React.Component {
         event.preventDefault ();
 
         let {title, post, author} = this.state;
+
         this.props.createNewPost({
             title,
             id: uuid(Date.now()),
@@ -45,7 +46,6 @@ class NewPost extends React.Component {
     render () {
 
         let { categories } = this.props;
-        console.log(categories)
         return (
             <div {...newPostStyles}>
                 <div>

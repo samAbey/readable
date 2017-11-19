@@ -3,7 +3,7 @@ import React from 'react';
 import { PropTypes } from 'prop-types';
 import moment from 'moment';
 
-import { postStyles } from './post.css'
+import { postStyles, postMetaStyles } from './post.css'
 import { Link } from 'react-router-dom';
 
 class Post extends React.Component {
@@ -21,9 +21,11 @@ class Post extends React.Component {
 
             !post.deleted?<div {...postStyles}>
                 <h1>{post.title}</h1>
-                <p>Votes: {post.voteScore}</p>
-                <p>{time}</p>
-                <p>{post.commentCount===0?'No Comments Yet':`${post.commentCount} Comments`}</p>
+                <div {...postMetaStyles}>
+                    <p>Votes: {post.voteScore}</p>
+                    <p>{time}</p>
+                    <p>{post.commentCount===0?'No Comments Yet':`${post.commentCount} Comments`}</p>
+                </div>
                 <Link to={{
                     pathname: `/post/${post.id}`
                 }}>Read more</Link>
