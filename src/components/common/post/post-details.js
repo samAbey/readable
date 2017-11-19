@@ -53,6 +53,9 @@ class PostDetails extends React.Component {
                     {this.props.post?<Comments comments={this.props.comments}/>:null}
                 </div>
                 <div>
+                    <a href="">Add comment</a>
+                </div>
+                <div>
                     <Link to={{
                         pathname: `/post/edit/${post.id}`
                     }}>Edit</Link>

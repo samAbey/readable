@@ -25,8 +25,7 @@ class NewPost extends React.Component {
         
         this.setState({
             [id]: value
-        })
-
+        });
         
     }
     

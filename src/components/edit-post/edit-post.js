@@ -3,12 +3,15 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { getPost, editSinglePost } from '../../redux/actions/posts';
 
+import { Redirect } from 'react-router-dom';
+
 class EditPost extends React.Component {
 
 
     state = {
         title: '',
-        body: ''
+        body: '',
+        redirect: false
     }
 
     onChange = event => {
@@ -27,6 +30,10 @@ class EditPost extends React.Component {
         event.preventDefault();
         this.props.editPost(this.state, this.props.postId);
 
+        this.setState ({
+            redirect: true
+        });
+
     }
 
     componentDidMount () {
@@ -40,7 +47,9 @@ class EditPost extends React.Component {
         this.setState({
             title,
             body
-        })
+        });
+
+        
     }
 
 
@@ -49,7 +58,7 @@ class EditPost extends React.Component {
         let { categories } = this.props;
 
 
-        return (
+        return !this.state.redirect?(
             
             <div>
                 
@@ -64,7 +73,7 @@ class EditPost extends React.Component {
                 </div>
             </div>
            
-        );
+        ): <Redirect to={`/post/${this.props.postId}`}/>;
     }
 }
 
