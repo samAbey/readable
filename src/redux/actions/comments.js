@@ -73,7 +73,7 @@ export const deleteComment = (id) => {
             type: DELETE_COMMENT
         });
 
-        deleteCommentfromPost (id).then(data=> {
+        deleteCommentfromPost (id).then(response=>response.json()).then(data=> {
             dispatch ({
                 type: COMMENT_DELETED,
                 data
