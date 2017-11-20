@@ -27,6 +27,7 @@ class Comments extends React.Component {
             this.props.addComment(comment)
         } else if (this.state.mode==='edit') {
             this.props.editComment(this.state.commentId, {body, timestamp: Date.now()});
+            this.props.getComments(this.props.postid);
         }
     }
 
