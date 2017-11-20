@@ -1,6 +1,6 @@
-import { fetchComments, addComment } from '../../api/api';
+import { fetchComments, addComment, editComment } from '../../api/api';
 
-import{ FETCH_COMMENTS, COMMENTS_RECEIVED, ADD_COMMENT } from '../action_types';
+import{ FETCH_COMMENTS, COMMENTS_RECEIVED, ADD_COMMENT, COMMENT_ADDED, EDIT_COMMENT, COMMENT_EDITED } from '../action_types';
 
 
 export const getComments = id => {
@@ -31,11 +31,26 @@ export const addCommentToPost = (comment) => {
 
         addComment (comment).then((data) => {
             dispatch ({
-                type: ADD_COMMENT,
+                type: COMMENT_ADDED,
                 data
             })
         });
    }
 
 
+}
+
+export const editSingleComment = (id, comment) => {
+    return dispatch => {
+        dispatch ({
+            type: EDIT_COMMENT
+        });
+
+        editComment (id, comment).then(data => {
+            dispatch ({
+                type: COMMENT_EDITED,
+                data
+            });
+        });
+    }
 }

@@ -55,7 +55,6 @@ export const deletePost = (id) => {
 }
 
 export const addComment = (comment) => {
-    console.log(comment)
     return fetch (`${URL}/comments`, {
         method: 'POST',
         headers: { ...HEADERS,  'Content-Type': 'application/json'},
@@ -63,4 +62,14 @@ export const addComment = (comment) => {
     })
 }
 
+export const editComment = (id, comment) => {
+    console.log(id, comment)
+    return fetch (
+        `${URL}/comments/${id}`, {
+            method: 'PUT',
+            headers: { ...HEADERS,  'Content-Type': 'application/json'},
+            body: JSON.stringify(comment)
+        }
+    )
+}
 

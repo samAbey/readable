@@ -3,9 +3,10 @@ import { PropTypes } from 'prop-types';
 
 import { connect } from 'react-redux';
 
-import { addCommentToPost, getComments } from '../../../redux/actions/comments';
+import { addCommentToPost, getComments, editSingleComment } from '../../../redux/actions/comments';
 
 import AddComment from './add-comment';
+import { comment } from '../../../../../../../../../Users/sameera/Library/Caches/typescript/2.6/node_modules/postcss';
 
 class Comments extends React.Component {
 
@@ -20,10 +21,12 @@ class Comments extends React.Component {
     }
     
     addComment = (comment) => {
+        console.log(comment);
+        let { body } = comment;
         if (this.state.mode==='add') {
             this.props.addComment(comment)
         } else if (this.state.mode==='edit') {
-            alert('comment is being edited')
+            this.props.editComment(this.state.commentId, {body, timestamp: Date.now()});
         }
         
         this.props.getComments(this.props.postid)
@@ -32,7 +35,8 @@ class Comments extends React.Component {
     editComment = (comment) => {
         this.setState({
             editCommentValues: comment,
-            mode: 'edit'
+            mode: 'edit',
+            commentId: comment.id
         })
     }
 
@@ -98,7 +102,8 @@ class Comments extends React.Component {
 const mapDispatchToProps = dispatch => {
     return {
         addComment: post => dispatch(addCommentToPost(post)),
-        getComments: id => dispatch(getComments(id))
+        getComments: id => dispatch(getComments(id)),
+        editComment: (id, comment) => dispatch(editSingleComment(id, comment))
     }
 }
 

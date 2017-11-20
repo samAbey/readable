@@ -24,13 +24,14 @@ class AddComment extends React.Component {
 
     constComment = () => {
 
-        let comment = {
+        let comment = this.props.mode==='add'?{
             id: uuid(Date.now()),
             timestamp: Date.now(),
             body: this.state.body,
             author: this.state.author,
             parentId: this.props.postid
-        };
+        }:{body: this.state.body};
+        
 
         this.refs.body.value = '';
         this.refs.author.value = '';
@@ -72,7 +73,7 @@ class AddComment extends React.Component {
                 <div>
                     <input ref="body" onChange={this.handleChange} id="body" placeholder="Comment" type="text" value={this.props.body} />
                 </div>
-                <div>
+                <div style={{display: this.props.mode==='add'?'block':'none'}}>
                     <input ref="author" onChange={this.handleChange} id="author" placeholder="Your Name" type="text" value={this.props.author} />
                 </div>
                 <div>
@@ -80,7 +81,7 @@ class AddComment extends React.Component {
                         this.props.addComment(this.constComment());
                         this.props.changeMode();
                         event.preventDefault ();
-                        }}>Add comment</a>
+                        }}>{this.props.mode==='add'?'Add':'Edit'} comment</a>
                 </div>
             </div>
         )
