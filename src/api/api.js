@@ -59,11 +59,10 @@ export const addComment = (comment) => {
         method: 'POST',
         headers: { ...HEADERS,  'Content-Type': 'application/json'},
         body: JSON.stringify(comment)
-    })
+    });
 }
 
 export const editComment = (id, comment) => {
-    console.log(id, comment)
     return fetch (
         `${URL}/comments/${id}`, {
             method: 'PUT',
@@ -73,3 +72,12 @@ export const editComment = (id, comment) => {
     )
 }
 
+export const deleteCommentfromPost = (id) => {
+    return fetch (
+        `${URL}/comments/${id}`, {
+            method: 'DELETE',
+            headers: { ...HEADERS,  'Content-Type': 'application/json'},
+            body: JSON.stringify({deleted: true})
+        }
+    )
+}

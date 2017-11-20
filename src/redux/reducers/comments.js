@@ -1,10 +1,14 @@
-import { COMMENTS_RECEIVED } from '../action_types';
+import { COMMENTS_RECEIVED, COMMENT_ADDED } from '../action_types';
 
 const commentsReducer = (state=[], action) => {
 
     switch (action.type) {
         case COMMENTS_RECEIVED:
-            return Object.assign([], [...action.data]);
+            return [...action.data];
+
+        case COMMENT_ADDED:
+           
+            return [action.data, ...state]
 
         default:
             return state;

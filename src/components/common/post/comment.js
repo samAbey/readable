@@ -3,10 +3,9 @@ import { PropTypes } from 'prop-types';
 
 import { connect } from 'react-redux';
 
-import { addCommentToPost, getComments, editSingleComment } from '../../../redux/actions/comments';
+import { addCommentToPost, getComments, editSingleComment, deleteComment } from '../../../redux/actions/comments';
 
 import AddComment from './add-comment';
-import { comment } from '../../../../../../../../../Users/sameera/Library/Caches/typescript/2.6/node_modules/postcss';
 
 class Comments extends React.Component {
 
@@ -21,15 +20,19 @@ class Comments extends React.Component {
     }
     
     addComment = (comment) => {
-        console.log(comment);
+
         let { body } = comment;
+
         if (this.state.mode==='add') {
             this.props.addComment(comment)
         } else if (this.state.mode==='edit') {
             this.props.editComment(this.state.commentId, {body, timestamp: Date.now()});
         }
-        
-        this.props.getComments(this.props.postid)
+    }
+
+    deleteComment = (event, id) => {
+        event.preventDefault();
+        this.props.deleteComment(id);
     }
 
     editComment = (comment) => {
@@ -66,12 +69,15 @@ class Comments extends React.Component {
                                 event.preventDefault ();
                                 this.editComment (comment);
                             }}>Edit</a>
+                            <a href="#" onClick={(event) => {
+                                this.deleteComment(event, comment.id)
+                            }} >Delete</a>
                         </div>
                         
                         
                         :<div>This comment has been deleted'</div>
                     )
-                }):null}
+                }):'No comments yet!'}
             </ul>
             {this.state.mode === 'edit'?
                 <AddComment 
@@ -80,6 +86,7 @@ class Comments extends React.Component {
                     editCommentValues={this.state.editCommentValues}
                     mode={this.state.mode}
                     changeMode={this.changeMode}
+                    deleteComment={this.deleteComment}
                 />:
                 <AddComment 
                     postid={this.props.postid} 
@@ -91,6 +98,7 @@ class Comments extends React.Component {
                         id: false
                     }}
                     changeMode={this.changeMode}
+                    deleteComment={this.deleteComment}
                 />
             }
             </div>
@@ -99,12 +107,20 @@ class Comments extends React.Component {
 }
 
 
+const mapStateToProps = state => {
+    let { comments } = state;
+    return  {
+        comments
+    }
+}
+
 const mapDispatchToProps = dispatch => {
     return {
         addComment: post => dispatch(addCommentToPost(post)),
         getComments: id => dispatch(getComments(id)),
-        editComment: (id, comment) => dispatch(editSingleComment(id, comment))
+        editComment: (id, comment) => dispatch(editSingleComment(id, comment)),
+        deleteComment: (id) => dispatch(deleteComment(id))
     }
 }
 
-export default connect (null, mapDispatchToProps)(Comments)
+export default connect (mapStateToProps, mapDispatchToProps)(Comments);

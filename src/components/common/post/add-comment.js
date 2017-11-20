@@ -62,7 +62,6 @@ class AddComment extends React.Component {
             this.refs.author.value = '';
         }
 
-        //this.refs.body.value=nextProps.editCommentValues.body: null
     } 
 
     
@@ -82,6 +81,7 @@ class AddComment extends React.Component {
                         this.props.changeMode();
                         event.preventDefault ();
                         }}>{this.props.mode==='add'?'Add':'Edit'} comment</a>
+                    
                 </div>
             </div>
         )
