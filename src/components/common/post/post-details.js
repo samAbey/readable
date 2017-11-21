@@ -33,8 +33,6 @@ class PostDetails extends React.Component {
         this.setState({
             redirect: true
         });
-
-        
     }
 
     componentDidMount () {
@@ -50,7 +48,7 @@ class PostDetails extends React.Component {
                 <span>By {post.author} - {moment(post.timestamp).format('MMMM Do YYYY, h:mm:ss a')} posted under <span style={{color: 'tomato'}}>{post.category}</span></span>
                 <p className="post-body-text">{post.body}</p>
                 <p>Votes: {post.voteScore}</p>
-                <p>{post.commentCount?null:'No comments yet'}</p>
+                <p>{post.commentCount?`${post.commentCount} comments`:'No comments yet'}</p>
                 <div>
                     {this.props.post?<Comments postid={this.props.postid} comments={this.props.comments}/>:null}
                 </div>

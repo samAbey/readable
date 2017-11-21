@@ -31,8 +31,7 @@ class Comments extends React.Component {
         }
     }
 
-    deleteComment = (event, id) => {
-        event.preventDefault();
+    deleteComment = (id) => {
         this.props.deleteComment(id);
     }
 
@@ -71,12 +70,13 @@ class Comments extends React.Component {
                                 this.editComment (comment);
                             }}>Edit</a>
                             <a href="#" onClick={(event) => {
-                                this.deleteComment(event, comment.id)
+                                event.preventDefault ();
+                                this.deleteComment(comment.id)
                             }} >Delete</a>
                         </div>
                         
                         
-                        :<div>This comment has been deleted'</div>
+                        :null
                     )
                 }):'No comments yet!'}
             </ul>
