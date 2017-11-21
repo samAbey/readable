@@ -1,4 +1,4 @@
-import { POST_DETAILS_RECEIVED, COMMENT_ADDED } from '../action_types';
+import { POST_DETAILS_RECEIVED, COMMENT_ADDED, POST_VOTED } from '../action_types';
 
 const postReducer = (post={}, action) => {
 
@@ -10,8 +10,11 @@ const postReducer = (post={}, action) => {
         case COMMENT_ADDED:
             return Object.assign({}, post, { commentCount: post.commentCount+1});
         
-            default:
-                return post;
+        case POST_VOTED:
+            return Object.assign({}, post, {...action.data});
+        
+        default:
+            return post;
     }
 }
 

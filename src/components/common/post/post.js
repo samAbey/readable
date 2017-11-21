@@ -6,12 +6,26 @@ import moment from 'moment';
 import { postStyles, postMetaStyles } from './post.css'
 import { Link } from 'react-router-dom';
 
+import Vote from './../vote/vote';
+import { connect } from 'react-redux';
+import { voteSinglePost } from '../../../redux/actions/votes';
+import { fetchAllPosts } from '../../../redux/actions/posts';
+
 
 class Post extends React.Component {
 
     static propTypes = {
         post: PropTypes.object.isRequired
     };
+
+    upVotePost = () => {
+        this.props.votePost(this.props.post.id, 'upVote');
+        this.props.fetchAllPosts();
+    }    
+    downVotePost = () => {
+        this.props.votePost(this.props.post.id, 'downVote');
+        this.props.fetchAllPosts();
+    }
 
     render () {
 
@@ -30,11 +44,17 @@ class Post extends React.Component {
                 <Link to={{
                     pathname: `/post/${post.id}`
                 }}>Read more</Link>
+                <Vote upVotePost={this.upVotePost} downVotePost={this.downVotePost} voteScore={post.voteScore}/>
             </div>:null
             
         )
     }
 }
 
-
-export default Post;
+const mapDispatchToProps = (dispatch) => {
+    return {
+        votePost: (id, vote) =>  dispatch (voteSinglePost(id, vote)),
+        fetchAllPosts: () => dispatch (fetchAllPosts())
+    }
+}
+export default connect(null, mapDispatchToProps)(Post);

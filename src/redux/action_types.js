@@ -18,3 +18,5 @@ export const EDIT_COMMENT = 'EDIT_COMMENT';
 export const COMMENT_EDITED = 'COMMENT_EDITED';
 export const DELETE_COMMENT = 'DELETE_COMMENT';
 export const COMMENT_DELETED = 'COMMENT_DELETED';
+export const VOTE_POST = 'VOTE_POST';
+export const POST_VOTED = 'POST_VOTED';

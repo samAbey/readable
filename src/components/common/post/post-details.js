@@ -16,6 +16,10 @@ import Comments from './comment';
 import AddComment from './add-comment';
 import { deleteSinglePost, fetchAllPosts } from '../../../redux/actions/posts';
 
+import { voteSinglePost } from '../../../redux/actions/votes';
+
+import Vote from '../vote/vote';
+
 class PostDetails extends React.Component {
 
     state = {
@@ -35,6 +39,13 @@ class PostDetails extends React.Component {
         });
     }
 
+    upVotePost = () => {
+        this.props.votePost(this.props.post.id, 'upVote')
+    }    
+    downVotePost = () => {
+        this.props.votePost(this.props.post.id, 'downVote')
+    }
+
     componentDidMount () {
         this.props.getPost(this.props.postid);
         this.props.getComments(this.props.postid);
@@ -47,7 +58,7 @@ class PostDetails extends React.Component {
                 <h1>{post.title}</h1>
                 <span>By {post.author} - {moment(post.timestamp).format('MMMM Do YYYY, h:mm:ss a')} posted under <span style={{color: 'tomato'}}>{post.category}</span></span>
                 <p className="post-body-text">{post.body}</p>
-                <p>Votes: {post.voteScore}</p>
+                <Vote upVotePost={this.upVotePost} downVotePost={this.downVotePost} voteScore={post.voteScore}/>
                 <p>{post.commentCount?`${post.commentCount} comments`:'No comments yet'}</p>
                 <div>
                     {this.props.post?<Comments postid={this.props.postid} comments={this.props.comments}/>:null}
@@ -81,7 +92,8 @@ const mapDispatchToProps = dispatch => {
         getPost: id => dispatch(getPost(id)),
         getComments: id => dispatch(getComments(id)),
         deletePost: id => dispatch(deleteSinglePost(id)),
-        getAllPosts: () => dispatch(fetchAllPosts())
+        getAllPosts: () => dispatch(fetchAllPosts()),
+        votePost: (id, vote) =>  dispatch (voteSinglePost(id, vote))
     }
 }
 

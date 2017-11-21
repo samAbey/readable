@@ -81,3 +81,15 @@ export const deleteCommentfromPost = (id) => {
         }
     )
 }
+
+export const votePost = (id, vote) => {
+
+    return fetch (
+        `${URL}/posts/${id}`,  {
+            method: 'POST',
+            headers: {...HEADERS, 'Content-Type': 'application/json'},
+            body: JSON.stringify({option: vote})
+        }
+    );
+    
+}
