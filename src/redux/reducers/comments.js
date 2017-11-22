@@ -1,4 +1,4 @@
-import { COMMENTS_RECEIVED, COMMENT_ADDED, COMMENT_DELETED } from '../action_types';
+import { COMMENTS_RECEIVED, COMMENT_ADDED, COMMENT_DELETED, COMMENT_VOTED } from '../action_types';
 
 const commentsReducer = (state=[], action) => {
 
@@ -10,11 +10,19 @@ const commentsReducer = (state=[], action) => {
             return [action.data, ...state];
 
         case COMMENT_DELETED:
-
             
             return state.filter((comment) => {
                 return comment.id !== action.data.id;
             });
+
+        case COMMENT_VOTED:
+
+            let comments = state.filter((comment) => {
+                return comment.id !== action.data.id;
+            });
+
+
+            return [action.data, ...comments];
 
         default:
             return state;

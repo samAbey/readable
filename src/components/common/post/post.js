@@ -18,12 +18,12 @@ class Post extends React.Component {
         post: PropTypes.object.isRequired
     };
 
-    upVotePost = () => {
-        this.props.votePost(this.props.post.id, 'upVote');
+    upVotePost = (id) => {
+        this.props.votePost(id, 'upVote');
         this.props.fetchAllPosts();
     }    
-    downVotePost = () => {
-        this.props.votePost(this.props.post.id, 'downVote');
+    downVotePost = (id) => {
+        this.props.votePost(id, 'downVote');
         this.props.fetchAllPosts();
     }
 
@@ -44,7 +44,7 @@ class Post extends React.Component {
                 <Link to={{
                     pathname: `/post/${post.id}`
                 }}>Read more</Link>
-                <Vote upVotePost={this.upVotePost} downVotePost={this.downVotePost} voteScore={post.voteScore}/>
+                <Vote id={post.id} upVote={this.upVotePost} downVote={this.downVotePost} voteScore={post.voteScore}/>
             </div>:null
             
         )

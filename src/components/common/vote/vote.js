@@ -8,9 +8,9 @@ class Vote extends React.Component {
     render () {
         return (
             <div>
-                <span onClick={this.props.upVotePost}><FaThumbsUp /></span>
+                <span onClick={()=>{this.props.upVote(this.props.id)}}><FaThumbsUp /></span>
                 <span>{this.props.voteScore}</span>
-                <span onClick={this.props.downVotePost}><FaThumbsDown /></span>
+                <span onClick={()=>{this.props.downVote(this.props.id)}}><FaThumbsDown /></span>
             </div>
         );
     }

@@ -39,11 +39,11 @@ class PostDetails extends React.Component {
         });
     }
 
-    upVotePost = () => {
-        this.props.votePost(this.props.post.id, 'upVote')
+    upVotePost = (id) => {
+        this.props.votePost(id, 'upVote')
     }    
-    downVotePost = () => {
-        this.props.votePost(this.props.post.id, 'downVote')
+    downVotePost = (id) => {
+        this.props.votePost(id, 'downVote')
     }
 
     componentDidMount () {
@@ -58,7 +58,7 @@ class PostDetails extends React.Component {
                 <h1>{post.title}</h1>
                 <span>By {post.author} - {moment(post.timestamp).format('MMMM Do YYYY, h:mm:ss a')} posted under <span style={{color: 'tomato'}}>{post.category}</span></span>
                 <p className="post-body-text">{post.body}</p>
-                <Vote upVotePost={this.upVotePost} downVotePost={this.downVotePost} voteScore={post.voteScore}/>
+                <Vote id={this.props.postid} upVote={this.upVotePost} downVote={this.downVotePost} voteScore={post.voteScore}/>
                 <p>{post.commentCount?`${post.commentCount} comments`:'No comments yet'}</p>
                 <div>
                     {this.props.post?<Comments postid={this.props.postid} comments={this.props.comments}/>:null}

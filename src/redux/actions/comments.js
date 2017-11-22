@@ -1,4 +1,10 @@
-import { fetchComments, addComment, editComment, deleteCommentfromPost } from '../../api/api';
+import { 
+    fetchComments, 
+    addComment, 
+    editComment, 
+    deleteCommentfromPost,
+    voteComment
+} from '../../api/api';
 
 import { 
     FETCH_COMMENTS, 
@@ -8,7 +14,9 @@ import {
     EDIT_COMMENT, 
     COMMENT_EDITED,
     DELETE_COMMENT, 
-    COMMENT_DELETED
+    COMMENT_DELETED,
+    VOTE_COMMENT,
+    COMMENT_VOTED
 } from '../action_types';
 
 
@@ -76,6 +84,21 @@ export const deleteComment = (id) => {
         deleteCommentfromPost (id).then(response=>response.json()).then(data=> {
             dispatch ({
                 type: COMMENT_DELETED,
+                data
+            });
+        });
+    }
+}
+
+export const voteSingleComment = (id, vote) => {
+    return dispatch => {
+        dispatch ({
+            type: VOTE_COMMENT
+        });
+
+        voteComment (id, vote).then (response => response.json()).then(data => {
+            dispatch ({
+                type: COMMENT_VOTED, 
                 data
             });
         });

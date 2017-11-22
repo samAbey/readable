@@ -3,9 +3,11 @@ import { PropTypes } from 'prop-types';
 
 import { connect } from 'react-redux';
 
-import { addCommentToPost, getComments, editSingleComment, deleteComment } from '../../../redux/actions/comments';
+import { addCommentToPost, getComments, editSingleComment, deleteComment, voteComment, voteSingleComment } from '../../../redux/actions/comments';
 
 import AddComment from './add-comment';
+
+import Vote from '../vote/vote';
 
 class Comments extends React.Component {
 
@@ -49,6 +51,15 @@ class Comments extends React.Component {
         })
     }
 
+    upvoteComment = (id) => {
+        this.props.voteComment (id, 'upVote')
+    }
+
+    downVoteComment = (id) => {
+        console.log('voted');
+        this.props.voteComment(id, 'downVote');
+    }
+
 
     render () {
 
@@ -73,6 +84,7 @@ class Comments extends React.Component {
                                 event.preventDefault ();
                                 this.deleteComment(comment.id)
                             }} >Delete</a>
+                            <Vote id={comment.id} upVote={this.upvoteComment} downVote={this.downVoteComment} voteScore={comment.voteScore}/>
                         </div>
                         
                         
@@ -120,7 +132,8 @@ const mapDispatchToProps = dispatch => {
         addComment: post => dispatch(addCommentToPost(post)),
         getComments: id => dispatch(getComments(id)),
         editComment: (id, comment) => dispatch(editSingleComment(id, comment)),
-        deleteComment: (id) => dispatch(deleteComment(id))
+        deleteComment: (id) => dispatch(deleteComment(id)),
+        voteComment: (id, vote) => dispatch(voteSingleComment (id, vote))
     }
 }
 
