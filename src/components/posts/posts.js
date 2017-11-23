@@ -1,16 +1,12 @@
 import React from 'react';
-
-import { connect } from 'react-redux';
-
 import { PropTypes } from 'prop-types';
 
+import { connect } from 'react-redux';
 import { fetchAllPosts } from '../../redux/actions/posts';
 
 import Post from '../common/post/post';
 import SortBar from '../common/sort/sortbar';
-
 import { postsStyles } from './posts.css';
-
 import { withRouter } from 'react-router';
 
 

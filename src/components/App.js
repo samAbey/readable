@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { PropTypes } from 'prop-types';
 import './App.css';
 
 import Header from './common/header/header';
@@ -7,8 +8,6 @@ import Posts from './posts/posts';
 import NewPost from './new-post/new-post';
 import PostDetails from './common/post/post-details';
 import EditPost from './edit-post/edit-post';
-
-import { PropTypes } from 'prop-types';
 
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 

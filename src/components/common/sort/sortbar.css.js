@@ -1,6 +1,5 @@
 import { css } from 'glamor';
 
-
 const sortbarStyles = css({
     listStyle: 'none',
     textAlign: 'center',

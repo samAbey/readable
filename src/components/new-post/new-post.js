@@ -1,12 +1,11 @@
 import React from 'react';
 import { connect } from 'react-redux';
 
-import { createNewPost } from '../../redux/actions/posts';
-
 import uuid from 'uuid';
 
 import { newPostStyles } from './new-post.css';
 import { Redirect } from 'react-router-dom';
+import { createNewPost } from '../../redux/actions/posts';
 
 class NewPost extends React.Component {
 
@@ -87,8 +86,7 @@ const mapDispatchToProps = dispatch => {
 const mapStateToProps = state => {
 
     let { categories } = state;
-
-
+    
     return {
         categories
     }
