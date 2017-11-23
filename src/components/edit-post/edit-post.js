@@ -1,4 +1,5 @@
 import React from 'react';
+import { editPostWrapperStyles } from './edit-post.css';
 
 import { connect } from 'react-redux';
 import { getPost, editSinglePost } from '../../redux/actions/posts';
@@ -59,7 +60,7 @@ class EditPost extends React.Component {
 
         return !this.state.redirect?(
             
-            <div>
+            <div {...editPostWrapperStyles}>
                 
                 <div>
                     <input placeholder="Title" onChange={this.onChange} type="text" id="title" value={this.state.title} />
@@ -67,7 +68,7 @@ class EditPost extends React.Component {
                 <div>
                     <textarea onChange={this.onChange} id="body" value={this.state.body} />
                 </div>
-                <div>
+                <div className="edit-post-link-wrapper">
                     <a onClick={this.handleSubmit} href="">Edit</a>
                 </div>
             </div>
