@@ -9,7 +9,8 @@ import { Link } from 'react-router-dom';
 import Vote from './../vote/vote';
 import { connect } from 'react-redux';
 import { voteSinglePost } from '../../../redux/actions/votes';
-import { fetchAllPosts } from '../../../redux/actions/posts';
+import { fetchAllPosts, deleteSinglePost } from '../../../redux/actions/posts';
+
 
 
 class Post extends React.Component {
@@ -25,6 +26,15 @@ class Post extends React.Component {
     downVotePost = (id) => {
         this.props.votePost(id, 'downVote');
         this.props.fetchAllPosts();
+    }
+
+    deletePost = (event, id) => {
+        event.preventDefault();
+        this.props.deletePost(id);
+        this.props.fetchAllPosts();
+        this.setState({
+            redirect: true
+        });
     }
 
     render () {
@@ -44,7 +54,15 @@ class Post extends React.Component {
                 <Link to={{
                     pathname: `/post/${post.id}`
                 }}>Read more</Link>
+
                 <Vote id={post.id} upVote={this.upVotePost} downVote={this.downVotePost} voteScore={post.voteScore}/>
+
+                <div>
+                    <Link to={{
+                        pathname: `/post/edit/${post.id}`
+                    }}>Edit</Link>
+                    <a href="" onClick={event=> {this.deletePost(event, post.id)}}>Delete</a>
+                </div>
             </div>:null
             
         )
@@ -54,7 +72,8 @@ class Post extends React.Component {
 const mapDispatchToProps = (dispatch) => {
     return {
         votePost: (id, vote) =>  dispatch (voteSinglePost(id, vote)),
-        fetchAllPosts: () => dispatch (fetchAllPosts())
+        fetchAllPosts: () => dispatch (fetchAllPosts()),
+        deletePost: id => dispatch(deleteSinglePost(id))
     }
 }
 export default connect(null, mapDispatchToProps)(Post);

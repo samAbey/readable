@@ -52,26 +52,30 @@ class PostDetails extends React.Component {
     }
 
     render () {
+
         let { post } = this.props;
-        return this.state.redirect?<Redirect to="/" push={true} />:(
-            <div {...postDetailsWrapperStyles}>
-                <h1>{post.title}</h1>
-                <span>By {post.author} - {moment(post.timestamp).format('MMMM Do YYYY, h:mm:ss a')} posted under <span style={{color: 'tomato'}}>{post.category}</span></span>
-                <p className="post-body-text">{post.body}</p>
-                <Vote id={this.props.postid} upVote={this.upVotePost} downVote={this.downVotePost} voteScore={post.voteScore}/>
-                <p>{post.commentCount?`${post.commentCount} comments`:'No comments yet'}</p>
-                <div>
-                    {this.props.post?<Comments postid={this.props.postid} comments={this.props.comments}/>:null}
-                </div>
-                
-                <div className="post-controls">
-                    <Link to={{
-                        pathname: `/post/edit/${post.id}`
-                    }}>Edit</Link>
-                    <a href="" onClick={this.deletePost}>Delete</a>
-                </div>
+
+        const renderPost = (post) => {
+            return post.id?<div {...postDetailsWrapperStyles}>
+            <h1>{post.title}</h1>
+            <span>By {post.author} - {moment(post.timestamp).format('MMMM Do YYYY, h:mm:ss a')} posted under <span style={{color: 'tomato'}}>{post.category}</span></span>
+            <p className="post-body-text">{post.body}</p>
+            <Vote id={this.props.postid} upVote={this.upVotePost} downVote={this.downVotePost} voteScore={post.voteScore}/>
+            <p>{post.commentCount?`${post.commentCount} comments`:'No comments yet'}</p>
+            <div>
+                {this.props.post?<Comments postid={this.props.postid} comments={this.props.comments}/>:null}
             </div>
-        );
+            
+            <div className="post-controls">
+                <Link to={{
+                    pathname: `/post/edit/${post.id}`
+                }}>Edit</Link>
+                <a href="" onClick={this.deletePost}>Delete</a>
+            </div>
+        </div>:<div>404: Page not found</div>
+        }
+
+        return this.state.redirect?<Redirect to="/" push={true} />:renderPost(post);
     }
 }
 
