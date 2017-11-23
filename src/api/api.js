@@ -96,12 +96,12 @@ export const votePost = (id, vote) => {
 
 export const voteComment = (id, vote) => {
     
-        return fetch (
-            `${URL}/comments/${id}`,  {
-                method: 'POST',
-                headers: {...HEADERS, 'Content-Type': 'application/json'},
-                body: JSON.stringify({option: vote})
-            }
-        );
-        
-    }
+    return fetch (
+        `${URL}/comments/${id}`,  {
+            method: 'POST',
+            headers: {...HEADERS, 'Content-Type': 'application/json'},
+            body: JSON.stringify({option: vote})
+        }
+    );
+    
+}

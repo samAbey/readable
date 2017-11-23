@@ -1,8 +1,7 @@
 import React from 'react';
+import { commentsWrapperStyles } from './add-comment.css';
 
-import { connect } from 'react-redux';
 import uuid from 'uuid';
-
 
 class AddComment extends React.Component {
 
@@ -68,7 +67,7 @@ class AddComment extends React.Component {
 
     render () {
         return (
-            <div>
+            <div {...commentsWrapperStyles}>
                 <div>
                     <input ref="body" onChange={this.handleChange} id="body" placeholder="Comment" type="text" value={this.props.body} />
                 </div>

@@ -1,13 +1,12 @@
 import React from 'react';
 import * as styles from './categories.css';
+import { PropTypes } from 'prop-types';
 
 import { connect } from 'react-redux';
-
 import { fetchCategories } from '../../../redux/actions/categories';
 
 import { Link } from 'react-router-dom';
 
-import { PropTypes } from 'prop-types';
 
 class Categories extends React.Component {
 
@@ -17,7 +16,7 @@ class Categories extends React.Component {
 
 
     componentDidMount = () => {
-      this.props.getCategories()
+      this.props.getCategories();
     }
     
 
@@ -44,7 +43,8 @@ const mapStateToProps = ({categories}) => {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        getCategories: () => { dispatch (fetchCategories())}
+        getCategories: () => {dispatch (fetchCategories())}
     }
 }
+
 export default connect(mapStateToProps, mapDispatchToProps) (Categories);
