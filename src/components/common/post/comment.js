@@ -1,12 +1,10 @@
 import React from 'react';
-import { PropTypes } from 'prop-types';
+import { commentStyles } from './comment.css';
 
 import { connect } from 'react-redux';
-
 import { addCommentToPost, getComments, editSingleComment, deleteComment, voteComment, voteSingleComment } from '../../../redux/actions/comments';
 
 import AddComment from './add-comment';
-
 import Vote from '../vote/vote';
 
 class Comments extends React.Component {
@@ -68,52 +66,54 @@ class Comments extends React.Component {
 
         return (
             <div>
-            <ul>
-                {comments?comments.map((comment, index)=> {
-                    return (
-                        !comment.deleted?
+                <ul {...commentStyles}>
+                    {comments?comments.map((comment, index)=> {
+                        return (
+                            !comment.deleted?
 
-                        <div key={comment.id}>
-                            <p >{comment.body}</p>
-                            <span>By {comment.author} </span><span>{comment.voteScore} Thumbs up</span>
-                            <a href="" onClick={(event) => {
-                                event.preventDefault ();
-                                this.editComment (comment);
-                            }}>Edit</a>
-                            <a href="#" onClick={(event) => {
-                                event.preventDefault ();
-                                this.deleteComment(comment.id)
-                            }} >Delete</a>
-                            <Vote id={comment.id} upVote={this.upvoteComment} downVote={this.downVoteComment} voteScore={comment.voteScore}/>
-                        </div>
-                        
-                        
-                        :null
-                    )
-                }):'No comments yet!'}
-            </ul>
-            {this.state.mode === 'edit'?
-                <AddComment 
-                    postid={this.props.postid} 
-                    addComment={this.addComment} 
-                    editCommentValues={this.state.editCommentValues}
-                    mode={this.state.mode}
-                    changeMode={this.changeMode}
-                    deleteComment={this.deleteComment}
-                />:
-                <AddComment 
-                    postid={this.props.postid} 
-                    addComment={this.addComment}
-                    mode={this.state.mode}
-                    editCommentValues={{
-                        author: false,
-                        body: false,
-                        id: false
-                    }}
-                    changeMode={this.changeMode}
-                    deleteComment={this.deleteComment}
-                />
-            }
+                            <li key={comment.id}>
+                                <p className="comment-body">{comment.body}</p>
+                                <span className="comment-author">By {comment.author} </span>
+                                <div className="comment-control" className="comment-controls">
+                                    <a href="" onClick={(event) => {
+                                        event.preventDefault ();
+                                        this.editComment (comment);
+                                    }}>Edit</a>
+                                    <a href="#" onClick={(event) => {
+                                        event.preventDefault ();
+                                        this.deleteComment(comment.id)
+                                    }} >Delete</a>
+                                    <Vote id={comment.id} upVote={this.upvoteComment} downVote={this.downVoteComment} voteScore={comment.voteScore}/>
+                                </div>
+                            </li>
+                            
+                            
+                            :null
+                        )
+                    }):'No comments yet!'}
+                </ul>
+                {this.state.mode === 'edit'?
+                    <AddComment 
+                        postid={this.props.postid} 
+                        addComment={this.addComment} 
+                        editCommentValues={this.state.editCommentValues}
+                        mode={this.state.mode}
+                        changeMode={this.changeMode}
+                        deleteComment={this.deleteComment}
+                    />:
+                    <AddComment 
+                        postid={this.props.postid} 
+                        addComment={this.addComment}
+                        mode={this.state.mode}
+                        editCommentValues={{
+                            author: false,
+                            body: false,
+                            id: false
+                        }}
+                        changeMode={this.changeMode}
+                        deleteComment={this.deleteComment}
+                    />
+                }
             </div>
         )
     }

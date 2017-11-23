@@ -64,7 +64,7 @@ class PostDetails extends React.Component {
                     {this.props.post?<Comments postid={this.props.postid} comments={this.props.comments}/>:null}
                 </div>
                 
-                <div>
+                <div className="post-controls">
                     <Link to={{
                         pathname: `/post/edit/${post.id}`
                     }}>Edit</Link>
