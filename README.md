@@ -11,13 +11,13 @@
 
 - clone [Frontend](https://github.com/samAbey/readable.git)
 - cd into project
-- `npm install` - This will install all the necessary files
+- `npm install` - This will install all the dependencies files
 - `npm start` - Up and run the dev server
 
 
 This project was bootstrapped with [Create React App](https://github.com/facebookincubator/create-react-app).
 
-###Dependencies
+### Dependencies
 
 - [GlamorJs](https://github.com/threepointone/glamor)
 - [moment](https://momentjs.com/)
