@@ -6,17 +6,15 @@ import moment from 'moment';
 
 import { PropTypes } from 'prop-types';
 
-import { connect } from 'react-redux';
-
-import { getPost } from '../../../redux/actions/posts';
-import { getComments } from '../../../redux/actions/comments';
-
 import { postDetailsWrapperStyles } from './post-details.css';
 import Comments from './comment';
 import AddComment from './add-comment';
-import { deleteSinglePost, fetchAllPosts } from '../../../redux/actions/posts';
 
+import { deleteSinglePost, fetchAllPosts, getPost } from '../../../redux/actions/posts';
 import { voteSinglePost } from '../../../redux/actions/votes';
+import { getComments } from '../../../redux/actions/comments';
+import { connect } from 'react-redux';
+
 
 import Vote from '../vote/vote';
 
